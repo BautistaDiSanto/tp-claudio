@@ -1,4 +1,4 @@
-def crearAuto(patente, horaIngreso, horaEgreso, torre):
+def createCar(patente, horaIngreso, horaEgreso, torre):
     auto = [patente, horaIngreso, horaEgreso, torre]
     return auto
 
@@ -25,5 +25,3 @@ def setHoraEgreso(auto, horaEgreso):
 
 def setTorre(auto, torre):
     auto[3] = torre
-
-
