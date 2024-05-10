@@ -1,0 +1,24 @@
+6) En un centro comercial en la ciudad de Buenos Aires, se cuenta con un estacionamiento para los
+empleados y clientes del lugar. Al momento de ingresar un vehículo, se necesita registrar su patente,
+la hora de entrada y la torre a la que pertenece el conductor.
+Cuando un vehículo sale del estacionamiento, se registra la hora de salida y el monto total de la
+estadía. Se aplica un descuento del 15% a todos los vehículos que hayan estado en la torre 3. El
+valor de la hora de estadía se establece al comienzo del día. Se deberá desarrollar una aplicación
+utilizando las estructuras de datos necesarias. Se desea tener un menú con las siguientes opciones:
+a) Ingresar, modificar y eliminar vehículo: Permite ingresar, modificar o eliminar la información
+de un vehículo en el estacionamiento, utilizando su patente como referencia.
+b) Registrar salida de vehículo: Registra la salida de un vehículo del estacionamiento, calculando el
+monto total de la estadía y aplicando el descuento correspondiente si corresponde a la torre 3.
+c) Listado de vehículos: Muestra un listado completo de todos los vehículos estacionados en el
+centro comercial, incluyendo su patente, hora de entrada y torre asignada.
+d) Informe de recaudación por torre: Genera un informe que indica el monto recaudado por cada
+torre del estacionamiento durante un período determinado.
+e) Cantidad de vehículos ingresados en horas pico: Muestra la cantidad de vehículos que ingresaron
+al estacionamiento durante las horas pico, que comprenden desde las 7:00 hasta las 10:00 y desde
+las 17:00 hasta las 20:00.
+f) Eliminar vehículos ingresados después de las 18:00 en una torre específica: Permite eliminar
+todos los vehículos que ingresaron después de las 18:00 en una torre determinada, liberando
+espacio en el estacionamiento.
+g) Generar una cola de vehículos de la torre 3: Listar la cola cada vez que se elija esta opción
+(tengan cuidado de no dejar la cola vacía al terminar de listar), mostrando los vehículos
+estacionados en la torre 3, permitiendo tener información de los descuentos.
