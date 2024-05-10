@@ -1,5 +1,6 @@
-def createCar(patente, horaIngreso, horaEgreso, torre):
-    auto = [patente, horaIngreso, horaEgreso, torre]
+def createCar(patente, horaIngreso, horaEgreso, monto, torre):
+    print("Creando auto")
+    auto = [patente, horaIngreso, horaEgreso, monto,torre]
     return auto
 
 def getPatente(auto):

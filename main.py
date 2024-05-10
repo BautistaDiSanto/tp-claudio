@@ -8,6 +8,8 @@ autosPico = 0
 
 #menu
 opcion = None
+print("Creando torres...")
+estacionamiento = crearEst()
 print("Bienvenido! Ingrese la opcion a realizar: ")
 while opcion != 0:
     print("\n1) Ingresar vehiculo.")
@@ -32,10 +34,7 @@ while opcion != 0:
         egreso=0
         torre=int(input("Ingrese el numero de torre: "))
         #ingresarAuto(listaEst,patente,ingreso,egreso,torre) //agrega auto a la lista
-        print("\nSe agrego el vehiculo...")
-        print("PATENTE: ",patente)
-        print("HORA DE INGRESO: ",str(ingreso.strftime("%H:%M:%S")))
-        print("TORRE NUMERO: ",torre)
+        ingresarAuto(estacionamiento, patente, ingreso, None, None, torre)
 
     elif opcion == 2:
         print("MODIFICACION DE VEHICULO")

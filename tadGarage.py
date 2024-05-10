@@ -1,14 +1,14 @@
+from tadAuto import *
 
-
-
-
-def crearEst()
+def crearEst():
     #crear estacionamiento
     return []
 
-def ingresarAuto(estacionamiento, a):
+def ingresarAuto(estacionamiento, patente, horaIngreso, horaEgreso, monto, torre):
+    auto = createCar(patente, horaIngreso, horaEgreso, monto, torre)
+    print("agregando auto")
     #pide por teclado dato de patente, dueño, hora de entrada y usa crearAuto() para luego ingresarlo al estacionamiento
-    estacionamiento.append(a)
+    estacionamiento.append(auto)
 
 
 """def buscarAuto(patente, estacionamiento):
@@ -21,7 +21,7 @@ def ingresarAuto(estacionamiento, a):
                 i = i+1
     return i"""
 
-def eliminarAuto(estacionamiento, a)
+def eliminarAuto(estacionamiento, a):
     #buscar auto por patente y luego lo elimina de la lista
     	#pos = buscarAuto(patente, estacionamiento)
     estacionamiento.remove(a)
