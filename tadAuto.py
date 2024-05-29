@@ -1,7 +1,17 @@
-def createCar(patente, horaIngreso, horaEgreso, monto, torre):
-    print("Creando auto")
-    auto = [patente, horaIngreso, horaEgreso, monto,torre]
+def createCar():
+	#crea un auto vacío
+   # print("Creando auto")		// No se hacen print en los TAD
+    auto = ["", None, None, None, None]
     return auto
+
+def fillCar(auto, patente, horaIngreso, horaEgreso, monto, torre):
+   # carga los datos del auto
+    auto[0] = patente
+    auto[1] = horaIngreso
+    auto[2] = horaEgreso
+    auto[3] = monto
+    auto[4] = torre
+    
 
 def getPatente(auto):
     return auto[0]
