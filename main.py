@@ -2,8 +2,8 @@ from tadAuto import *
 from tadGarage import *
 import datetime
 
-#listaEst = crearEst() // crea lista de autos para agregar ingresos
-#regisEst = crearEst() // crea registro de autos para cargar luego los que egresan
+listaEst = crearEst() # crea lista de autos para agregar ingresos
+regisEst = crearEst() # crea registro de autos para cargar luego los que egresan
 
 autosPico = 0
 
@@ -35,12 +35,12 @@ while opcion != 0:
         #para modificar hora se usa: i = i.replace(hour=int(input()))
         egreso=0
         torre=int(input("Ingrese el numero de torre: "))
-       """ #ingresarAuto(listaEst,patente,ingreso,egreso,torre) //agrega auto a la lista
-	ingresarAuto(estacionamiento, patente, ingreso, None, None, torre)"""
-	#Esto cambió
-	auto = createCar()
-	fillCar(auto, patente, ingreso, None, None, torre)
-	ingresarAuto(listaEst, auto)
+        #ingresarAuto(listaEst,patente,ingreso,egreso,torre) //agrega auto a la lista
+        # ingresarAuto(estacionamiento, patente, ingreso, None, None, torre
+        #Esto cambió
+        auto = createCar()
+        fillCar(auto, patente, ingreso, None, None, torre)
+        ingresarAuto(listaEst, auto)
     elif opcion == 2:
         print("MODIFICACION DE VEHICULO")
         patente = input("Ingrese patente sin espacios: ")
@@ -48,11 +48,12 @@ while opcion != 0:
         #i = buscarAuto(patente) //busca patente el lista y devuelve indice de ubicacion 
         #si no lo encuentra devuelve None e imprime que el auto no existe en el estacionamiento
         #imprimirAuto(i)
-	j = 0	#posición en estacionamiento
-	while j < tamanioGar(estacionamiento):		#voy recorriendo todo el est
-		a = devolverAuto(estacionamiento, j)
-		if getPatente(a) == patente		#si es True tengo que quedarme con ese auto y cortar el bucle
-			break 	#???
+        j = 0	#posición en estacionamiento
+        while j < tamanioGar(estacionamiento):		#voy recorriendo todo el est
+            a = devolverAuto(estacionamiento, j)
+            #si es True tengo que quedarme con ese auto y cortar el bucle
+            if (getPatente(a) == patente):
+                break 	#???
 		
         while i != None:
             print("Ingrese la opcion a realizar: ")

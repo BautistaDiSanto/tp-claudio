@@ -4,7 +4,7 @@ def crearEst():
     #crear estacionamiento
     return []
 
-def ingresarAuto(estacionamiento, auto) #patente, horaIngreso, horaEgreso, monto, torre):
+def ingresarAuto(estacionamiento, auto): #patente, horaIngreso, horaEgreso, monto, torre):
     #auto = createCar(patente, horaIngreso, horaEgreso, monto, torre)
     #print("agregando auto") 	//Las funciones del TAD no llevan prints
     estacionamiento.append(auto)
