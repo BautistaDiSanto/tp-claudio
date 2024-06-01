@@ -1,5 +1,3 @@
-#from tadAuto import * //El TAD no usa el otro TAD, son módulos independientes
-
 def crearEst():
     #crear estacionamiento
     return []
