@@ -170,6 +170,3 @@ while opcion != 0:
         #colaTorre = generarCola(listaEst,t)
         #print(colaTorre)
 
-    """
-    FALTA AGREGAR VARIABLE DE LISTAS A LAS FUNCIONES
-    """
