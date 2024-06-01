@@ -1,9 +1,11 @@
 from tadAuto import *
 from tadGarage import *
+from helper import *
 import datetime
 
-listaEst = crearEst() # crea lista de autos para agregar ingresos
-regisEst = crearEst() # crea registro de autos para cargar luego los que egresan
+#listaEst = crearEst() # crea lista de autos para agregar ingresos
+#regisEst = crearEst() # crea registro de autos para cargar luego los que egresan
+#Funciones
 
 autosPico = 0
 
@@ -40,7 +42,7 @@ while opcion != 0:
         #Esto cambió
         auto = createCar()
         fillCar(auto, patente, ingreso, None, None, torre)
-        ingresarAuto(listaEst, auto)
+        ingresarAuto(estacionamiento, auto)
     elif opcion == 2:
         print("MODIFICACION DE VEHICULO")
         patente = input("Ingrese patente sin espacios: ")
@@ -79,46 +81,56 @@ while opcion != 0:
     elif opcion == 3:
         print("ELIMINACION DE VEHICULO")
         patente = input("Ingrese patente sin espacios: ")
-        i = 0 #invento un indice para probar
-        #i = buscarAuto(patente) //busca patente el lista y devuelve indice de ubicacion 
-        #imprimirAuto(i)
+        j = buscarAuto(estacionamiento, patente)
         opcionElim = input("Desea eliminar este vehiculo? s/n: ")
 
-        if opcionElim == "s":
-            eliminarAuto(listaEst, i)		#i es el auto filtrado
+        if opcionElim == "s" or opcionElim == "S":
+            a = devolverAuto(estacionamiento, j)
+            eliminarAuto(estacionamiento, a)		#i es el auto filtrado
             print("Se elimino el vehiculo.")
-        elif opcionElim == "S":			#esto habría que ponerlo como 'o' con el anterior
+        #elif opcionElim == "S":			#esto habría que ponerlo como 'o' con el anterior
             #eliminarAuto(i)
-            print("Se elimino el vehiculo.")
-        elif opcionElim == "n":
+        #    print("Se elimino el vehiculo.")
+        elif opcionElim == "n" or opcionElim == "N":
             print("No se elimino el vehiculo.")	# acá igual esto o aquello => tal cosa
-        elif opcionElim == "N":
-            print("No se elimino el vehiculo.")
+        #elif opcionElim == "N":
+        #    print("No se elimino el vehiculo.")
         else:
             print("La letra ingresada no es correcta")
 
     elif opcion == 4:
         print("REGISTRO DE SALIDA DE VEHICULO")
         patente = input("Ingrese patente sin espacios: ")
-        i = 0 #invento un indice para probar
-        #i = buscarAuto(patente) //busca patente el lista y devuelve indice de ubicacion 
+        i = buscarAuto(estacionamiento, patente)
+        a = devolverAuto(estacionamiento, i) 
         #imprimirAuto(i)
         opcionSalida = input("Desea registrar salida? s/n: ")
-        if opcionSalida == "s":
-            #registrarAuto(i)
+        if opcionSalida == "s" or opcionSalida == "S":
+            #AGREGAR COBRO (Si torre es 3 aplicar descuento)
+            registrarAuto(registro, a)
+            eliminarAuto(estacionamiento, a)
+            
             print("Se registro la salida del vehiculo.")
-        elif opcionSalida == "S":
+        #elif opcionSalida == "S":
             #registrarAuto(i)
-            print("Se registro la salida del vehiculo.")
-        elif opcionSalida == "n":
+        #    print("Se registro la salida del vehiculo.")
+        elif opcionSalida == "n" or opcionSalida == "N":
             print("No se registro la salida del vehiculo.")
-        elif opcionSalida == "N":
-            print("No se registro la salida del vehiculo.")
+        #elif opcionSalida == "N":
+        #    print("No se registro la salida del vehiculo.")
         else:
             print("La letra ingresada no es correcta")
 
     elif opcion == 5:
         print("LISTA DE VEHICULOS EN ESTACIONAMIENTO")
+        
+        for i in range(tamanioGar(estacionamiento)):
+            a = devolverAuto(estacionamiento, i)
+            print("patente: " + getPatente(a))
+            cad = str(getHoraIngreso(a))
+            print("hora ingreso: " + cad)
+            torre = str(getTorre(a))
+            print("torre: " + torre)
         #imprimirLista(t)?
         """ for x in range(len(listaEst)):
             print (*listaEst, sep="\n")"""
@@ -126,7 +138,15 @@ while opcion != 0:
     elif opcion == 6:
         print("REGISTRO DE VEHICULOS EGRESADOS")
         #imprimirLista(t)?
-    
+        for i in range(tamanioGar(registro)):
+            a = devolverAuto(registro, i)
+            print("patente: " + getPatente(a))
+            cad = str(getHoraIngreso(a))
+            print("hora ingreso: " + cad)
+            #hora egreso
+            #monto
+            torre = str(getTorre(a))
+            print("torre: " + torre)
     elif opcion == 7:
         print("INFORME DE RECAUDACION POR TORRE")
         torre = int(input("Ingrese numero de torre: "))
