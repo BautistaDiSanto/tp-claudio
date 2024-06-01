@@ -23,7 +23,7 @@ def getHoraEgreso(auto):
     return auto[2]
 
 def getTorre(auto):
-    return auto[3]
+    return auto[4]
 
 def setPatente(auto, patente):
     auto[0] = patente
@@ -35,4 +35,4 @@ def setHoraEgreso(auto, horaEgreso):
     auto[2] = horaEgreso
 
 def setTorre(auto, torre):
-    auto[3] = torre
+    auto[4] = torre
