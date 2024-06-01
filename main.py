@@ -9,6 +9,8 @@ import datetime
 
 autosPico = 0
 
+valorHora = int(input("Ingrese el valor de la hora: "))
+
 #menu
 opcion = None
 print("Creando torres...")
