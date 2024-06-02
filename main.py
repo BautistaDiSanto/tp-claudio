@@ -6,12 +6,14 @@ import datetime
 autosPico = 0
 
 valorHora = int(input("Ingrese el valor de la hora: "))
+estacionamiento = crearEst()
+
+load_vehicles_from_file("cargaAutos.txt", estacionamiento, valorHora)
 
 #menu
 opcion = None
 print("")
 print("Creando torres...")
-estacionamiento = crearEst()
 registro = crearEst()
 print("")
 print("Bienvenido!")
@@ -132,17 +134,11 @@ while opcion != 0:
 
     elif opcion == 5:
         print("LISTA DE VEHICULOS EN ESTACIONAMIENTO")
-        
+        i = 0
+
         for i in range(tamanioGar(estacionamiento)):
             a = devolverAuto(estacionamiento, i)
-            print("patente: " + getPatente(a))
-            cad = str(getHoraIngreso(a))
-            print("hora ingreso: " + cad)
-            torre = str(getTorre(a))
-            print("torre: " + torre)
-        #imprimirLista(t)?
-        """ for x in range(len(listaEst)):
-            print (*listaEst, sep="\n")"""
+            print(a)            
     
     elif opcion == 6:
         print("REGISTRO DE VEHICULOS EGRESADOS")
@@ -164,8 +160,7 @@ while opcion != 0:
     elif opcion == 8:
         print("")
         print("CANTIDAD DE VEHICULOS EN HORAS PICO")
-        print("Entre las 7:00 hasta las 10:00hrs y 17:00 hasta las 20:00hrs ingresaron un total de:")
-        print(autosPico)
+        print(f"Ingresaron {autosPico} vehiculos entre las 7:00 - 10:00hs y 17:00 - 20:00hs")
 
     elif opcion == 9:
         print("ELIMINAR VEHICULOS A PARTIR DE HORA DETERMINADA")
