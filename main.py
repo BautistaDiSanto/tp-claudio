@@ -4,13 +4,12 @@ from helper import *
 import time
 import datetime
 
-autosPico = 0
-
 valorHora = int(input("Ingrese el valor de la hora: "))
+autosPico = [0]
 estacionamiento = crearEst()
 registro = crearEst()
 
-load_vehicles_from_file("cargaAutos.txt", estacionamiento, registro, valorHora)
+load_vehicles_from_file("cargaAutos.txt", estacionamiento, registro, valorHora, autosPico)
 
 #menu
 opcion = None
@@ -38,10 +37,7 @@ while opcion != 0:
         print("INGRESAR VEHICULO")
         patente=input("Ingrese la patente: ")
         ingreso=datetime.datetime.now()
-
-        if (int(ingreso.hour) >= 7 and int(ingreso.hour) <= 10) or (int(ingreso.hour) >= 17 and int(ingreso.hour) <= 20):
-            autosPico += 1
-
+        updateAutosPico(ingreso, autosPico)
         torre=int(input("Ingrese el numero de torre: "))
         auto = createCar()
         fillCar(auto, patente, ingreso, None, None, torre)
@@ -160,7 +156,6 @@ while opcion != 0:
         
     elif opcion == 6:
         print("REGISTRO DE VEHICULOS EGRESADOS")
-        #imprimirLista(t)?
         for i in range(tamanioGar(registro)):
             a = devolverAuto(registro, i)
             print("patente: " + getPatente(a))
@@ -172,6 +167,7 @@ while opcion != 0:
             print("monto abonado: " + str(monto))
             torre = str(getTorre(a))
             print("torre: " + torre)
+
     elif opcion == 7:
         print("INFORME DE RECAUDACION POR TORRE")
         torre = int(input("Ingrese numero de torre: "))
@@ -180,7 +176,7 @@ while opcion != 0:
     elif opcion == 8:
         print("")
         print("CANTIDAD DE VEHICULOS EN HORAS PICO")
-        print(f"Ingresaron {autosPico} vehiculos entre las 7:00 - 10:00hs y 17:00 - 20:00hs")
+        print(f"Ingresaron {autosPico[0]} vehiculos entre las 7:00 - 10:00hs y 17:00 - 20:00hs")
 
     elif opcion == 9:
         print("ELIMINAR VEHICULOS A PARTIR DE HORA DETERMINADA")
@@ -192,5 +188,3 @@ while opcion != 0:
         t = input("Ingrese numero de torre: ")
         #colaTorre = generarCola(listaEst,t)
         #print(colaTorre)
-
-    time.sleep(1)

@@ -9,8 +9,7 @@ def fillCar(auto, patente, horaIngreso, horaEgreso, monto, torre):
     auto[1] = horaIngreso
     auto[2] = horaEgreso
     auto[3] = monto
-    auto[4] = torre
-    
+    auto[4] = torre    
 
 def getPatente(auto):
     return auto[0]
