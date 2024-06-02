@@ -9,6 +9,8 @@ import datetime
 
 autosPico = 0
 
+valorHora = int(input("Ingrese el valor de la hora: "))
+
 #menu
 opcion = None
 print("Creando torres...")
@@ -171,6 +173,3 @@ while opcion != 0:
         #colaTorre = generarCola(listaEst,t)
         #print(colaTorre)
 
-    """
-    FALTA AGREGAR VARIABLE DE LISTAS A LAS FUNCIONES
-    """
