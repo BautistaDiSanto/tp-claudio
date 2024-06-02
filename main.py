@@ -1,6 +1,7 @@
 from tadAuto import *
 from tadGarage import *
 from helper import *
+import time
 import datetime
 
 #listaEst = crearEst() # crea lista de autos para agregar ingresos
@@ -105,21 +106,32 @@ while opcion != 0:
         patente = input("Ingrese patente sin espacios: ")
         i = buscarAuto(estacionamiento, patente)
         a = devolverAuto(estacionamiento, i) 
-        #imprimirAuto(i)
+        
+        #setea la hora de salida
+        egreso = datetime.datetime.now()
+        setHoraEgreso(a, egreso)
+        ingreso = getHoraIngreso(a)
+        cant_horas = egreso.hour - ingreso.hour
+        print(cant_horas)
+        
         opcionSalida = input("Desea registrar salida? s/n: ")
         if opcionSalida == "s" or opcionSalida == "S":
-            #AGREGAR COBRO (Si torre es 3 aplicar descuento)
-            registrarAuto(registro, a)
+            descuento = 1
+            #si pertenece a la torre 3 descontar 15% ( x 0,85)
+            if getTorre(a) == 3:
+                descuento = 0.85
+            monto = (cant_horas * valorHora) * descuento  #si descuento == 1, es como si no estuviera
+            setMonto(a, monto)
+            ingresarAuto(registro, a)
             eliminarAuto(estacionamiento, a)
             
+            print("el monto de estadía es $" + str(monto))
+            
             print("Se registro la salida del vehiculo.")
-        #elif opcionSalida == "S":
-            #registrarAuto(i)
-        #    print("Se registro la salida del vehiculo.")
+            
         elif opcionSalida == "n" or opcionSalida == "N":
             print("No se registro la salida del vehiculo.")
-        #elif opcionSalida == "N":
-        #    print("No se registro la salida del vehiculo.")
+
         else:
             print("La letra ingresada no es correcta")
 
@@ -127,26 +139,27 @@ while opcion != 0:
         print("LISTA DE VEHICULOS EN ESTACIONAMIENTO")
         
         for i in range(tamanioGar(estacionamiento)):
+            print("--------------------------------------")
             a = devolverAuto(estacionamiento, i)
             print("patente: " + getPatente(a))
-            cad = str(getHoraIngreso(a))
-            print("hora ingreso: " + cad)
+            cad = getHoraIngreso(a)
+            print("hora ingreso: " + str(cad.hour))
             torre = str(getTorre(a))
             print("torre: " + torre)
-        #imprimirLista(t)?
-        """ for x in range(len(listaEst)):
-            print (*listaEst, sep="\n")"""
-    
+        print("FIN DE LA LISTA")
+        
     elif opcion == 6:
         print("REGISTRO DE VEHICULOS EGRESADOS")
         #imprimirLista(t)?
         for i in range(tamanioGar(registro)):
             a = devolverAuto(registro, i)
             print("patente: " + getPatente(a))
-            cad = str(getHoraIngreso(a))
-            print("hora ingreso: " + cad)
-            #hora egreso
-            #monto
+            cad = getHoraIngreso(a)
+            print("hora ingreso: " + str(cad.hour))
+            cad = getHoraEgreso(a)
+            print("hora Egreso: " + str(cad.hour))
+            monto = getMonto(a)
+            print("monto abonado: " + str(monto))
             torre = str(getTorre(a))
             print("torre: " + torre)
     elif opcion == 7:
@@ -170,3 +183,4 @@ while opcion != 0:
         #colaTorre = generarCola(listaEst,t)
         #print(colaTorre)
 
+    time.sleep(1)
