@@ -1,6 +1,5 @@
 def createCar():
 	#crea un auto vacío
-   # print("Creando auto")		// No se hacen print en los TAD
     auto = ["", None, None, None, None]
     return auto
 

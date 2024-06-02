@@ -28,6 +28,7 @@ while opcion != 0:
     print("10) Generar cola por torre.")
     print("0) Salir.")
     opcion = int(input())
+
     if opcion == 1:
         print("INGRESAR VEHICULO")
         patente=input("Ingrese la patente: ")
@@ -43,38 +44,40 @@ while opcion != 0:
         auto = createCar()
         fillCar(auto, patente, ingreso, None, None, torre)
         ingresarAuto(estacionamiento, auto)
+
     elif opcion == 2:
         print("MODIFICACION DE VEHICULO")
         patente = input("Ingrese patente sin espacios: ")
-        i = 0 #invento un indice para probar
-        #i = buscarAuto(patente) //busca patente el lista y devuelve indice de ubicacion 
-        #si no lo encuentra devuelve None e imprime que el auto no existe en el estacionamiento
-        #imprimirAuto(i)
         j = 0	#posición en estacionamiento
-        while j < tamanioGar(estacionamiento):		#voy recorriendo todo el est
+
+        while j < tamanioGar(estacionamiento):
             a = devolverAuto(estacionamiento, j)
-            #si es True tengo que quedarme con ese auto y cortar el bucle
+            #if true me quedo con el indice y corto el bucle
             if (getPatente(a) == patente):
                 break 	#???
 		
-        while i != None:
+        a = devolverAuto(estacionamiento, j)
+        while j != None:
             print("Ingrese la opcion a realizar: ")
             print("1) Modificar hora de ingreso.")
             print("2) Modificar torre donde se estaciona.")
             print("0) Volver.")
             opcionMod = int(input())
+
             if opcionMod == 1:
-                print("Modifico la hora de ingreso")
-                #usar funcion replace para modificar hora y minutos por separado 
-                #input("Ingrese hora nueva: ")
-                #modificarHoraIngreso(i)
-		
+                current_time = getHoraIngreso(a)
+
+                updated_time = current_time.replace(hour=int(input("Ingrese nueva hora (0-23): ")), minute=int(input("Ingrese nuevos minutos (0-59): ")))
+
+                setHoraIngreso(a, updated_time)
+                print(f"Hora de ingreso modificada a: {updated_time}")
 
             elif opcionMod == 2:
-                print("Modifico torre donde se estaciona.")
-                #modificarTorre(i)
+                new_torre = int(input("Ingrese torre: "))
+                setTorre(a, new_torre)
             elif opcionMod == 0:
-                continue
+                print(f"Modificaciones: {a}")
+                break
             else:
                 print("El numero ingresado es incorrecto.")
     
