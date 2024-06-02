@@ -21,6 +21,9 @@ def getHoraIngreso(auto):
 def getHoraEgreso(auto):
     return auto[2]
 
+def getMonto(auto):
+    return auto[3]
+
 def getTorre(auto):
     return auto[4]
 
@@ -32,6 +35,9 @@ def setHoraIngreso(auto, horaIngreso):
 
 def setHoraEgreso(auto, horaEgreso):
     auto[2] = horaEgreso
+
+def setMonto(auto, monto):
+    auto[3] = monto
 
 def setTorre(auto, torre):
     auto[4] = torre

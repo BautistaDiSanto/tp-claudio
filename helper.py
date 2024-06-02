@@ -6,18 +6,20 @@ import datetime
 def buscarAuto(estacionamiento, patente):
 	j = 0   #posición en estacionamiento
 	while j < tamanioGar(estacionamiento):          #voy recorriendo todo el est
+		#print(j)
 		a = devolverAuto(estacionamiento, j)
 		#si es True tengo que quedarme con ese auto y cortar el bucle
+		#print(j)
 		if (getPatente(a) == patente):
 			return j
 			break
+		j = j +1
 
-def load_vehicles_from_file(filename, estacionamiento, valorHora):
+def load_vehicles_from_file(filename, estacionamiento, registro, valorHora):
     try:
         with open(filename, 'r') as file:
             lines = file.readlines()
             for line in lines:
-                print(line)
                 # Split the line by comma
                 data = line.strip().split(', ')
                 if len(data) != 4:
@@ -29,19 +31,22 @@ def load_vehicles_from_file(filename, estacionamiento, valorHora):
                 horaIngreso = datetime.datetime.strptime(data[1].strip(), '%H:%M')
                 horaEgreso = None
 
-                if data[2].strip() == "null":
-                    horaEgreso = None
-                else:
-                    horaEgreso = datetime.datetime.strptime(data[2].strip(), '%H:%M')
-                
                 torre = int(data[3].strip())
 
-                # Create and fill the car object
-                auto = createCar()
-                fillCar(auto, patente, horaIngreso, horaEgreso, None, torre)
+                if data[2].strip() == "null":
+                    # Create and fill the car object
+                    auto = createCar()
+                    fillCar(auto, patente, horaIngreso, None, None, torre)
+                    # Add the car to the parking lot
+                    ingresarAuto(estacionamiento, auto)
+                else:
+                    horaEgreso = datetime.datetime.strptime(data[2].strip(), '%H:%M')
+                    # Create and fill the car object
+                    auto = createCar()
+                    fillCar(auto, patente, horaIngreso, horaEgreso, None, torre)
+                    # Add the car to the parking lot
+                    ingresarAuto(registro, auto)
 
-                # Add the car to the parking lot
-                ingresarAuto(estacionamiento, auto)
                 print(f"Vehicle {patente} loaded successfully.")
     
     except FileNotFoundError:
