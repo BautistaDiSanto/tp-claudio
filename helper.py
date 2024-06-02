@@ -34,7 +34,6 @@ def load_vehicles_from_file(filename, estacionamiento, registro, valorHora, auto
             lines = file.readlines()
             for line in lines:
                 n += 1
-                print(line)
                 data = line.strip().split(', ')
                 if len(data) != 4:
                     print(f"Invalid line format: {line}")
