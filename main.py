@@ -27,7 +27,7 @@ while opcion != 0:
     print("6) Registro de vehiculos egresados.")
     print("7) Informe de reacaudacion por torre.")
     print("8) Cantidad de vehiculos en horas pico.")
-    print("9) Eliminar vehiculos a partir de hora determinada.")
+    print("9) Eliminar vehiculos a partir de 18hs en torre determinada.")
     print("10) Generar cola por torre.")
     print("0) Salir.")
     opcion = int(input("Ingrese la opcion: "))
@@ -179,9 +179,21 @@ while opcion != 0:
         print(f"Ingresaron {autosPico[0]} vehiculos entre las 7:00 - 10:00hs y 17:00 - 20:00hs")
 
     elif opcion == 9:
-        print("ELIMINAR VEHICULOS A PARTIR DE HORA DETERMINADA")
-        elimHora = input("Ingrese hora: ")
-        #eliminaHora(elimHora)
+        print("")
+        print("ELIMINAR VEHICULOS A PARTIR DE 18hs EN TORRE DETERMINADA")
+        torre = int(input("Ingrese numero de torre: "))
+        indices_to_remove = []
+        
+        for i in range(tamanioGar(estacionamiento)):
+            a = devolverAuto(estacionamiento, i)
+
+            if getHoraIngreso(a).hour >= 18 and getTorre(a) == torre:
+                indices_to_remove.append(i)
+
+        for index in sorted(indices_to_remove, reverse=True):
+            a = devolverAuto(estacionamiento, index)
+            eliminarAuto(estacionamiento, a)
+            print(f"Se eliminó el vehículo {getPatente(a)}")
 
     elif opcion == 10:
         print("GENERAR COLA POR TORRE")

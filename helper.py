@@ -2,7 +2,6 @@ from tadGarage import *
 from tadAuto import *
 import datetime
 
-
 def buscarAuto(estacionamiento, patente):
 	j = 0   #posición en estacionamiento
 	while j < tamanioGar(estacionamiento):          #voy recorriendo todo el est
@@ -31,9 +30,11 @@ def updateAutosPico(horaIngreso, autosPico):
 def load_vehicles_from_file(filename, estacionamiento, registro, valorHora, autosPico):
     try:
         with open(filename, 'r') as file:
+            n = 0
             lines = file.readlines()
-
             for line in lines:
+                n += 1
+                print(line)
                 data = line.strip().split(', ')
                 if len(data) != 4:
                     print(f"Invalid line format: {line}")
@@ -53,13 +54,15 @@ def load_vehicles_from_file(filename, estacionamiento, registro, valorHora, auto
                     auto = createCar()
                     fillCar(auto, patente, horaIngreso, horaEgreso, None, torre)
                     ingresarAuto(registro, auto)
-                
 
                 print("")
                 print(f"Vehicle {patente} loaded successfully.")
 
+            print("")
+            print(f"{n} VEHICULOS CARGADOS.")
+
     except FileNotFoundError:
-        print(f"File {filename} not found.")
+        print(f"File {file.readlines().len()} not found.")
 
     except Exception as e:
         print(f"An error occurred: {e}")
