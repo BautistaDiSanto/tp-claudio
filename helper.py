@@ -65,3 +65,20 @@ def load_vehicles_from_file(filename, estacionamiento, registro, valorHora, auto
 
     except Exception as e:
         print(f"An error occurred: {e}")
+
+def deltaHoras(ingreso, egreso):
+    diferencia = egreso - ingreso
+    segundos = diferencia.total_seconds()
+    horas = segundos * 1/3600
+    return horas
+
+def recaudacionXtorre(garage, torre, anio, mes):
+    total = 0
+    j = 0   #posición en estacionamiento
+    while j < tamanioGar(garage):          #voy recorriendo todo el est
+		#print(j)
+        a = devolverAuto(garage, j)
+        egreso = getHoraEgreso(a)
+        if (getTorre(a) == torre and egreso.year == anio and egreso.month == mes):
+            total = total + getMonto(a)
+        j = j +1
