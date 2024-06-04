@@ -8,6 +8,7 @@ valorHora = int(input("Ingrese el valor de la hora: "))
 autosPico = [0]
 estacionamiento = crearEst()
 registro = crearEst()
+saldoXtorre = [0, 0, 0]
 
 load_vehicles_from_file("cargaAutos.txt", estacionamiento, registro, valorHora, autosPico)
 
@@ -96,13 +97,10 @@ while opcion != 0:
             a = devolverAuto(estacionamiento, j)
             eliminarAuto(estacionamiento, a)		#i es el auto filtrado
             print("Se elimino el vehiculo.")
-        #elif opcionElim == "S":			#esto habría que ponerlo como 'o' con el anterior
-            #eliminarAuto(i)
-        #    print("Se elimino el vehiculo.")
+        
         elif opcionElim == "n" or opcionElim == "N":
             print("No se elimino el vehiculo.")	# acá igual esto o aquello => tal cosa
-        #elif opcionElim == "N":
-        #    print("No se elimino el vehiculo.")
+        
         else:
             print("La letra ingresada no es correcta")
 
@@ -116,8 +114,8 @@ while opcion != 0:
         egreso = datetime.datetime.now()
         setHoraEgreso(a, egreso)
         ingreso = getHoraIngreso(a)
-        cant_horas = egreso.hour - ingreso.hour
-        print(cant_horas)
+        cant_horas = deltaHoras(ingreso, egreso)
+        #print(cant_horas)
         
         opcionSalida = input("Desea registrar salida? s/n: ")
         if opcionSalida == "s" or opcionSalida == "S":
@@ -131,6 +129,8 @@ while opcion != 0:
             eliminarAuto(estacionamiento, a)
             
             print("el monto de estadía es $" + str(monto))
+            torre = getTorre(a)
+            saldoXtorre[torre-1] = saldoXtorre[torre-1] + monto
             
             print("Se registro la salida del vehiculo.")
             
@@ -157,6 +157,7 @@ while opcion != 0:
     elif opcion == 6:
         print("REGISTRO DE VEHICULOS EGRESADOS")
         for i in range(tamanioGar(registro)):
+            print("--------------------------------------")
             a = devolverAuto(registro, i)
             print("patente: " + getPatente(a))
             cad = getHoraIngreso(a)
@@ -171,7 +172,12 @@ while opcion != 0:
     elif opcion == 7:
         print("INFORME DE RECAUDACION POR TORRE")
         torre = int(input("Ingrese numero de torre: "))
+        anio = int(input("Ingrese el año del período a considerar: "))
+        mes = int(input("Ingrese el mes del período a considerar (número): "))
+        total = recaudacionXtorre(registro, torre, anio, mes)
+        #a partir de un período determinado (If fecha es mayor que y menor)
         #calcularTorre(t)
+        print("el monto recaudado es: " + str(total))
 
     elif opcion == 8:
         print("")
