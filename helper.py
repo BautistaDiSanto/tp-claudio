@@ -13,6 +13,12 @@ def buscarAuto(estacionamiento, patente):
 			return j
 			break
 		j = j +1
+          
+def deltaHoras(ingreso, egreso):
+    diferencia = egreso - ingreso
+    segundos = diferencia.total_seconds()
+    horas = segundos * 1/3600
+    return horas
 
 def updateAutosPico(horaIngreso, autosPico):
     if int(horaIngreso.hour) >= 7 and int(horaIngreso.hour) <= 10:
@@ -50,8 +56,13 @@ def load_vehicles_from_file(filename, estacionamiento, registro, valorHora, auto
                     ingresarAuto(estacionamiento, auto)
                 else:
                     horaEgreso = datetime.datetime.strptime(data[2].strip(), '%H:%M')
+                    descuento = 1
+                    #si pertenece a la torre 3 descontar 15% ( x 0,85)
+                    if torre == 3:
+                        descuento = 0.85
+                    monto = (deltaHoras(horaIngreso, horaEgreso) * valorHora) * descuento
                     auto = createCar()
-                    fillCar(auto, patente, horaIngreso, horaEgreso, None, torre)
+                    fillCar(auto, patente, horaIngreso, horaEgreso, monto, torre)
                     ingresarAuto(registro, auto)
 
                 print("")
@@ -65,12 +76,6 @@ def load_vehicles_from_file(filename, estacionamiento, registro, valorHora, auto
 
     except Exception as e:
         print(f"An error occurred: {e}")
-
-def deltaHoras(ingreso, egreso):
-    diferencia = egreso - ingreso
-    segundos = diferencia.total_seconds()
-    horas = segundos * 1/3600
-    return horas
 
 def recaudacionXtorre(garage, torre, anio, mes):
     total = 0

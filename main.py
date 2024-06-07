@@ -165,7 +165,7 @@ while opcion != 0:
             print("hora ingreso: " + str(cad.hour)+":"+str(cad.minute))
             cad = getHoraEgreso(a)
             print("Ingreso fecha: " + str(cad.day)+"-"+str(cad.month)+"-"+str(cad.year))
-            print("hora ingreso: " + str(cad.hour)+":"+str(cad.minute))
+            print("hora engreso: " + str(cad.hour)+":"+str(cad.minute))
             monto = getMonto(a)
             print("monto abonado: " + str(monto))
             torre = str(getTorre(a))
