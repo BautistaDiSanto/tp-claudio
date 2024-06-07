@@ -83,7 +83,7 @@ def recaudacionXtorre(garage, torre, anio, mes):
     while j < tamanioGar(garage):          #voy recorriendo todo el est
 		#print(j)
         a = devolverAuto(garage, j)
-        
+        egreso = getHoraEgreso(a)
         if (getTorre(a) == torre and egreso.year == anio and egreso.month == mes):
             total = total + getMonto(a)
         j = j +1
