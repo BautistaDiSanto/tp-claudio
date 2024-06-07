@@ -73,15 +73,14 @@ while opcion != 0:
                 updated_time = current_time.replace(hour=int(input("Ingrese nueva hora (0-23): ")), minute=int(input("Ingrese nuevos minutos (0-59): ")))
                 setHoraIngreso(a, updated_time)
 
-                if (int(getHoraIngreso(a).hour) >= 7 and int(getHoraIngreso(a).hour) <= 10) or (int(getHoraIngreso(a).hour) >= 17 and int(getHoraIngreso(a).hour) <= 20):
-                    autosPico += 1
+                updateAutosPico(getHoraIngreso(a), autosPico)
 
             elif opcionMod == 2:
                 new_torre = int(input("Ingrese torre: "))
                 setTorre(a, new_torre)
 
             elif opcionMod == 0:
-                print(f"Modificaciones: {a}")
+                print(f"Modificaciones: patente: {getPatente(a)}, torre: {getTorre(a)}, hora ingreso: {getHoraIngreso(a)}")
                 break
 
             else:
@@ -124,13 +123,13 @@ while opcion != 0:
             if getTorre(a) == 3:
                 descuento = 0.85
             monto = (cant_horas * valorHora) * descuento  #si descuento == 1, es como si no estuviera
-            setMonto(a, monto)
+            setMonto(a, round(monto, 2))
             ingresarAuto(registro, a)
             eliminarAuto(estacionamiento, a)
             
-            print("el monto de estadía es $" + str(monto))
+            print("el monto de estadía es $" + str(getMonto(a)))
             torre = getTorre(a)
-            saldoXtorre[torre-1] = saldoXtorre[torre-1] + monto
+            saldoXtorre[torre-1] = saldoXtorre[torre-1] + getMonto(a)
             
             print("Se registro la salida del vehiculo.")
             
