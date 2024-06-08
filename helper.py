@@ -1,5 +1,6 @@
 from tadGarage import *
 from tadAuto import *
+from tadCola import *
 import datetime
 
 def buscarAuto(estacionamiento, patente):
@@ -88,3 +89,44 @@ def recaudacionXtorre(garage, torre, anio, mes):
             total = total + getMonto(a)
         j = j +1
     return total
+
+def reencolar(cola, copia):
+    while not colaVacia(copia):
+        a = desencolar(copia)
+        encolar(cola, a)
+    return
+
+def desencolarPorPatente(cola, patente):
+    copia = crearCola()
+    while not colaVacia(cola):
+        a = desencolar(cola)
+        if getPatente(a) == patente:
+            # viola el tad?
+            print(f"Auto {getPatente(a)} eliminado.")
+        else:
+            encolar(copia, a)
+    reencolar(cola, copia)
+
+def cambiarHoraEnCola(cola, patente, horaIngreso):
+    copia = crearCola()
+    while not colaVacia(cola):
+        a = desencolar(cola)
+        if getPatente(a) == patente:
+            # viola el tad?
+            setHoraIngreso(a, horaIngreso)
+        encolar(copia, a)
+    reencolar(cola, copia)
+
+def printCola(cola):
+    copia = crearCola()
+    while not colaVacia(cola):
+        a = desencolar(cola)
+        print("--------------------------------------")
+        print("patente: " + getPatente(a))
+        cad = getHoraIngreso(a)
+        print("Ingreso fecha: " + str(cad.day)+"-"+str(cad.month)+"-"+str(cad.year))
+        print("hora ingreso: " + str(cad.hour)+":"+str(cad.minute))
+        torre = str(getTorre(a))
+        print("torre: " + torre)
+        encolar(copia, a)
+    reencolar(cola, copia)

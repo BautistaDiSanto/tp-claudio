@@ -40,3 +40,6 @@ def setMonto(auto, monto):
 
 def setTorre(auto, torre):
     auto[4] = torre
+
+def copiarAuto(a, auto):
+    fillCar(auto, getPatente(a), getHoraIngreso(a), getHoraEgreso(a), getMonto(a), getTorre(a))

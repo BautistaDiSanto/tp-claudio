@@ -1,13 +1,14 @@
 from tadAuto import *
 from tadGarage import *
+from tadCola import *
 from helper import *
-import time
 import datetime
 
 valorHora = int(input("Ingrese el valor de la hora: "))
 autosPico = [0]
 estacionamiento = crearEst()
 registro = crearEst()
+cola = crearCola()
 saldoXtorre = [0, 0, 0]
 
 load_vehicles_from_file("cargaAutos.txt", estacionamiento, registro, valorHora, autosPico)
@@ -43,6 +44,8 @@ while opcion != 0:
         auto = createCar()
         fillCar(auto, patente, ingreso, None, None, torre)
         ingresarAuto(estacionamiento, auto)
+        if torre == 3:
+            encolar(cola, auto)
 
     elif opcion == 2:
         print("")
@@ -58,7 +61,10 @@ while opcion != 0:
 
             j += 1
 		
-        a = devolverAuto(estacionamiento, j)
+        if (j < tamanioGar(estacionamiento)):
+            a = devolverAuto(estacionamiento, j)
+        else:
+            print("El vehiculo no se encuentra en el estacionamiento.")
 
         while j != None:
             print("")
@@ -77,6 +83,10 @@ while opcion != 0:
 
             elif opcionMod == 2:
                 new_torre = int(input("Ingrese torre: "))
+                if new_torre == 3:
+                    encolar(cola, a)
+                if getTorre(a) == 3 and new_torre != 3:
+                    desencolarPorPatente(cola, getPatente(a))
                 setTorre(a, new_torre)
 
             elif opcionMod == 0:
@@ -94,7 +104,8 @@ while opcion != 0:
 
         if opcionElim == "s" or opcionElim == "S":
             a = devolverAuto(estacionamiento, j)
-            eliminarAuto(estacionamiento, a)		#i es el auto filtrado
+            desencolarPorPatente(cola, getPatente(a))
+            eliminarAuto(estacionamiento, a)
             print("Se elimino el vehiculo.")
         
         elif opcionElim == "n" or opcionElim == "N":
@@ -125,6 +136,7 @@ while opcion != 0:
             monto = (cant_horas * valorHora) * descuento  #si descuento == 1, es como si no estuviera
             setMonto(a, round(monto, 2))
             ingresarAuto(registro, a)
+            desencolarPorPatente(cola, getPatente(a))
             eliminarAuto(estacionamiento, a)
             
             print("el monto de estadía es $" + str(getMonto(a)))
@@ -204,7 +216,5 @@ while opcion != 0:
             print(f"Se eliminó el vehículo {getPatente(a)}")
 
     elif opcion == 10:
-        print("GENERAR COLA POR TORRE")
-        t = input("Ingrese numero de torre: ")
-        #colaTorre = generarCola(listaEst,t)
-        #print(colaTorre)
+        print("INFO DE COLA")
+        printCola(cola)
